@@ -1,6 +1,7 @@
 import os
+import requests
 
-from flask import Flask, session
+from flask import Flask, session, jsonify
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -23,4 +24,7 @@ db = scoped_session(sessionmaker(bind=engine))
 
 @app.route("/")
 def index():
-    return "Project 1: TODO"
+    res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": "mLyb4WtEDK4Tcp76Bm2uyw", "isbns": "9781632168146"})
+    data = res.json()
+
+    return jsonify(data)
