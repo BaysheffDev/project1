@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+	Home
+{% endblock %}
+
+{% block body %}
+	<div class="center">
+		<form class="searchform" action="/books" method="post">
+			<input type="text" name="book_search" placeholder="e.g. isbn, title, author">
+			<button type="submit">Search</button>
+		</form>
+	</div>
+{% endblock %}

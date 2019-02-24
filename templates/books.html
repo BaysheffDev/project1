@@ -1,0 +1,111 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+	Books
+{% endblock %}
+
+{% block body %}
+
+  <div>{{ search }}</div>
+	<input type="hidden" name="stored_search" value="the wicked">
+	<input type="hidden" name="book_id_rating" id="isbn" value="">
+	<input type="hidden" name="book_id_rewiew" id="isbn" value="">
+
+	<div class="bookscontainer">
+    <div class="books">
+      {% for n in range(books|length) %}
+      <div class="book">
+            <div class="bookinfo">
+              <div class="infoitem"><span>ISBN: </span>{{ books[n][1] }}</div>
+              <div class="infoitem"><span>Title: </span>{{ books[n][2] }}</div>
+              <div class="infoitem"><span>Author: </span>{{ books[n][3] }}, {{ books[n][4] }}</div>
+            </div>
+            <div class="bookreviews">
+              <div class="infoitem"><span>Reviews: </span>{{ reviews[n][0] }}</div>
+              <div class="infoitem"><span>Rating: </span>{{ reviews[n][1] }}</div>
+              <div class="goodreadrating">
+                {% set score = reviews[n][1] | float %}
+                {% set len = 123 - (score / 5 * 123) %}
+                <div style="width:{{ len|int }}px" class="grstarcover"></div>
+                <div class="grrating">
+                  <div class="grstarcontainer">
+                    <div class="grstar1"></div>
+                    <div class="grstar2"></div>
+                  </div>
+                  <div class="grstarcontainer">
+                    <div class="grstar1"></div>
+                    <div class="grstar2"></div>
+                  </div>
+                  <div class="grstarcontainer">
+                    <div class="grstar1"></div>
+                    <div class="grstar2"></div>
+                  </div>
+                  <div class="grstarcontainer">
+                    <div class="grstar1"></div>
+                    <div class="grstar2"></div>
+                  </div>
+                  <div class="grstarcontainer">
+                    <div class="grstar1"></div>
+                    <div class="grstar2"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="yourrating">
+              {% set score = reviews[n][1] | float %}
+              {% set len = 240 - (score / 5 * 240) %}
+              <div style="width:{{ len|int }}px" id="starcover{{n}}" class="starcover"></div>
+              <div id="rating{{n}}" class="rating">
+                <div class="starcontainer">
+                  <div class="star1"></div>
+                  <div class="star2"></div>
+                </div>
+                <div class="starcontainer">
+                  <div class="star1"></div>
+                  <div class="star2"></div>
+                </div>
+                <div class="starcontainer">
+                  <div class="star1"></div>
+                  <div class="star2"></div>
+                </div>
+                <div class="starcontainer">
+                  <div class="star1"></div>
+                  <div class="star2"></div>
+                </div>
+                <div class="starcontainer">
+                  <div class="star1"></div>
+                  <div class="star2"></div>
+                </div>
+              </div>
+            </div>
+						<div class="yourratingtitle">
+							<div class="yourratingtitlecontainer">
+								<div>Your star rating:</div>
+								<div id="sliderValue{{n}}" class="yourratingscore"></div>
+							</div>
+							<form class="reviewslider" action="/books" id="submitrating{{n}}" method="post">
+								<input class="slider" oninput="showValue(this.value, {{n}})" type="range" name="rating" min=0 max=5 step=0.1 value="2"/>
+								<button onclick="submitreview(submitrating{{n}}, {{books[n][1]}})">Submit</button>
+							</form>
+            </div>
+            <div class="yourreview">
+						{% if review %}
+							<div class="reviewtext">
+								{{ review }}
+							</div>
+						{% endif %}
+						<div id="writereview{{n}}" onclick="dropdown({{n}})" class="writereview">
+							vvv Click to write review vvv
+						</div>
+              <div id="reviewtextbox{{n}}" class="reviewtextbox" style="display:none">
+								<form action="/books" id="submitreviewtext{{n}}" method="post">
+									<textarea name="review" rows="8"></textarea>
+									<button onclick="submitreview(submitreviewtext{{n}}, {{books[n][1]}})">Submit review</button>
+								</form>
+							</div>
+            </div>
+      </div>
+      {% endfor %}
+    </div>
+	</div>
+{% endblock %}

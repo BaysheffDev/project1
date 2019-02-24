@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+  <link href="/static/styles.css" rel="stylesheet">
+  <script src="/static/script.js"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
+	<title>project1</title>
+</head>
+<body>
+    <nav>
+      <div class="navlinks">
+        <a href="/"><div>Home</div></a>
+        {% if session.user_id %}
+          <a href="/login"><div>log out</div></a>
+        {% else %}
+          <a href="/login"><div>log in</div></a>
+          <a href="/register"><div>register</div></a>
+        {% endif %}
+      </div>
+    </nav>
+    <div class="bannerimage">
+      <h2 class="center">{% block heading %}{% endblock %}</h2>
+    </div>
+    <div class="topspacer"></div>
+
+    {% block body %}
+    {% endblock %}
+</body>
+</html>

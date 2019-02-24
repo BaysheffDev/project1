@@ -1,0 +1,298 @@
+body {
+  margin: 0;
+  width: 100vw;
+  font-family: 'Raleway', sans-serif;
+}
+
+h2 {
+  color: #ffffff;
+  letter-spacing: 2px;
+}
+
+.topspacer {
+  height: 220px;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  background: white;
+}
+
+nav {
+  height: 50px;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
+
+.navlinks {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.navlinks a {
+  text-decoration: none;
+  color: white;
+}
+.navlinks a:hover {
+  text-decoration: underline;
+  color: #ffd9b1;
+}
+
+.navlinks div {
+    width: 80px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bannerimage {
+  background-image: url("books.jpg");
+  height: 200px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  box-shadow: 0px 3px 3px lightgrey;
+}
+
+.form {
+  width: 200px;
+}
+
+.form form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+input {
+  margin: 0px 0px 15px 0px;
+  border-radius: 20px;
+  outline: none;
+  padding: 5px;
+}
+
+button {
+  border-radius: 20px;
+  background: lightgreen;
+  border: none;
+  box-shadow: 1px 3px 3px grey;
+  color: white;
+  font-weight: bold;
+  height: 25px;
+  outline: none;
+}
+
+.form form button:focus {
+  border: 2px solid #00d6c0;
+}
+
+.searchform {
+  display: flex;
+}
+
+.bookscontainer {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.books {
+  width: 500px;
+}
+
+.book {
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border-bottom: 1px solid lightgrey;
+  padding-bottom: 5px;
+}
+
+.bookinfo, .bookreviews {
+  width: 47.5%;
+  display: flex;
+  flex-wrap: wrap;;
+  border-radius: 10px;
+  min-width: 230px;
+  margin-bottom: 10px;
+  min-height: 84px;
+}
+
+.bookinfo {
+  background: #d8e3c5;
+}
+
+.bookreviews {
+  background: #fdfcdd;
+}
+
+.infoitem {
+  width: 100%;
+  padding: 5px;
+}
+
+.infoitem span {
+  font-weight: bold;
+}
+
+.yourratingtitle {
+    margin: 5px 0px;
+    width: 47.5%;
+}
+
+.yourratingscore {
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.yourratingtitlecontainer {
+  display: flex;
+}
+
+.slider {
+  margin: 0;
+}
+
+.reviewslider {
+  display: flex;
+  justify-content: space-between;
+}
+
+.goodreadrating {
+  width: 50%;
+  transform: rotate(180deg);
+  margin: 0px 0px 5px 5px;
+}
+
+.yourrating {
+    width: 47.5%;
+    transform: rotate(180deg);
+}
+
+.rating {
+    height: 50px;
+    width: 100%;
+    background: #ffd60014;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.yourreview {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.yourreviewtext {
+  margin-top: 10px;
+}
+
+.starcover {
+    background: #ffffff;
+    height: 50px;
+    position: absolute;
+    z-index: 1;
+    transform: translateX(-1px);
+}
+
+.starcontainer {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: 0px 9px;
+}
+
+.star1 {
+    width: 30px;
+    background: #ffd600;
+    height: 30px;
+}
+
+.star2 {
+    width: 30px;
+    background: #ffd600;
+    height: 30px;
+    transform: rotate(45deg);
+    position: absolute;
+}
+
+.grrating {
+    height: 24px;
+    width: 100%;
+    background: #88ff7a38;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.grstarcontainer {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: 0px 3px;
+}
+
+.grstar1 {
+  width: 15px;
+  background: #ffd600;
+  height: 15px;
+}
+
+.grstarcover {
+    background: #fdfcdd;
+    height: 25px;
+    position: absolute;
+    z-index: 1;
+    transform: translateX(-3px);
+}
+
+.grstar2 {
+    width: 15px;
+    background: #ffd600;
+    height: 15px;
+    transform: rotate(45deg);
+    position: absolute;
+}
+
+.writereview {
+  color: #6a8c72;
+  margin: 20px 0px 10px 0px;
+  width: 100%;
+  text-align: center;
+}
+
+.writereview:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+.reviewtextbox {
+    width: 100%;
+}
+.reviewtextbox form {
+  width: 100%;
+  text-align: center;
+}
+.reviewtextbox button {
+  margin: 10px 0px;
+}
+textarea {
+    width: 100%;
+}
