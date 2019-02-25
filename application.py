@@ -56,31 +56,40 @@ def books():
         isbn_rating = request.form.get("book_id_rating")
         isbn_review = request.form.get("book_id_rating")
 
+        rating = request.form.get("rating")
+        review = request.form.get("review")
+        
         # Update database with new rating
         if isbn_rating:
             # Check if entry exists
-            result = db.execute("SELECT * WHERE isbn=:isbn AND user_id=:user_id",
+            result = db.execute("SELECT * FROM reviews WHERE isbn=:isbn AND user_id=:user_id",
                                 {"isbn": isbn_rating, "user_id": session["user_id"]}).fetchall()
             # If entry doesn't exists insert
             if not result:
-                db.execute("INSERT INTO reviews (isbn, user_id, rating, rating_text) VALUES (:isbn, :user_id, :rating, :rating_text)",
-                           {"isbn": isbn, "title": title, "author": author, "year": year})
+                db.execute("INSERT INTO reviews (isbn, user_id, rating) VALUES (:isbn, :user_id, :rating)",
+                           {"isbn": isbn, "user_id": session[user_id], "rating": rating})
+                db.commit()
             # Else update
             else:
                 db.execute("UPDATE reviews SET rating=:rating WHERE id=:id",
-                           {"rating": rating, "id": id})
+                           {"rating": isbn_rating, "id": result[0][0]})
+                db.commit()
 
         # Update database with new rating
         if isbn_review:
             # Check if entry exists
-            result = db.execute("SELECT id, isbn, title, author, year FROM books WHERE LOWER(isbn) LIKE :book OR LOWER(title) LIKE :book OR LOWER(author) LIKE :book",
-                                {"book": "%" + search + "%"}).fetchall()
-
-            # If entry exists update
-
-            # Else insert
-            db.execute("INSERT INTO books (isbn, title, author, year) VALUES (:isbn, :title, :author, :year)",
-                       {"isbn": isbn, "title": title, "author": author, "year": year})
+            result = db.execute("SELECT * FROM reviews WHERE isbn=:isbn AND user_id=:user_id",
+                                {"isbn": isbn_review, "user_id": session["user_id"]}).fetchall()
+            # If entry doesn't exists insert
+            if not result:
+                db.execute("INSERT INTO reviews (isbn, user_id, rating_text) VALUES (:isbn, :user_id, :rating_text)",
+                           {"isbn": isbn, "user_id": session[user_id], "rating_text": review})
+                db.commit()
+            # Else update
+            else:
+                db.execute("UPDATE reviews SET rating_text=:rating_text WHERE id=:id",
+                           {"rating_text": isbn_review, "id": result[0][0]})
+                db.commit()
 
         # Refshesh page with same search results if user just updated a rating or review
         if search:
