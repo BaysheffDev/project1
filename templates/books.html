@@ -5,13 +5,10 @@
 {% endblock %}
 
 {% block body %}
-
-  <div>{{ search }}</div>
-	<input type="hidden" name="stored_search" value="the wicked">
-	<input type="hidden" name="book_id_rating" id="isbn" value="">
-	<input type="hidden" name="book_id_rewiew" id="isbn" value="">
-
 	<div class="bookscontainer">
+		{% if not books %}
+		<div class="error">{{ message }}</div>
+		{% else %}
     <div class="books">
       {% for n in range(books|length) %}
       <div class="book">
@@ -52,7 +49,7 @@
               </div>
             </div>
             <div class="yourrating">
-              {% set score = reviews[n][1] | float %}
+              {% set score = user_reviews[n][0] | float %}
               {% set len = 240 - (score / 5 * 240) %}
               <div style="width:{{ len|int }}px" id="starcover{{n}}" class="starcover"></div>
               <div id="rating{{n}}" class="rating">
@@ -81,17 +78,30 @@
 						<div class="yourratingtitle">
 							<div class="yourratingtitlecontainer">
 								<div>Your star rating:</div>
-								<div id="sliderValue{{n}}" class="yourratingscore"></div>
+								<div id="sliderValue{{n}}" class="yourratingscore">
+									{% if user_reviews[n][0] %}
+										{{user_reviews[n][0]}}
+									{% else %}
+										0
+									{% endif %}
+								</div>
 							</div>
 							<form class="reviewslider" action="/books" id="submitrating{{n}}" method="post">
-								<input class="slider" oninput="showValue(this.value, {{n}})" type="range" name="rating" min=0 max=5 step=0.1 value="2"/>
-								<button onclick="submitreview(submitrating{{n}}, {{books[n][1]}})">Submit</button>
+								<input type="hidden" name="stored_search" value="{{search}}"/>
+								<input type="hidden" name="book_id_rating" value="{{books[n][1]}}"/>
+								<input class="slider"
+											 oninput="showValue(this.value, {{n}})"
+											 type="range"
+											 name="rating"
+											 min=0 max=5 step=0.1 value="{{user_reviews[n][0]}}"/>
+								<button type="submit">Submit</button>
 							</form>
             </div>
             <div class="yourreview">
-						{% if review %}
+						{% if user_reviews[n][1] %}
+							<div class="yourreviewtitle">Your review:</div>
 							<div class="reviewtext">
-								{{ review }}
+								{{ user_reviews[n][1] }}
 							</div>
 						{% endif %}
 						<div id="writereview{{n}}" onclick="dropdown({{n}})" class="writereview">
@@ -99,13 +109,16 @@
 						</div>
               <div id="reviewtextbox{{n}}" class="reviewtextbox" style="display:none">
 								<form action="/books" id="submitreviewtext{{n}}" method="post">
+									<input type="hidden" name="stored_search" value="{{search}}"/>
+									<input type="hidden" name="book_id_review" value="{{books[n][1]}}"/>
 									<textarea name="review" rows="8"></textarea>
-									<button onclick="submitreview(submitreviewtext{{n}}, {{books[n][1]}})">Submit review</button>
+									<button type="submit">Submit review</button>
 								</form>
 							</div>
             </div>
       </div>
       {% endfor %}
     </div>
+		{% endif %}
 	</div>
 {% endblock %}

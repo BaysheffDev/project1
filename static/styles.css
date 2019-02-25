@@ -80,11 +80,15 @@ input {
   border-radius: 20px;
   outline: none;
   padding: 5px;
+  border: 1px solid lightgrey;
+}
+input:focus {
+  background: #fdfcdd;
 }
 
 button {
   border-radius: 20px;
-  background: lightgreen;
+  background: #b0c6af;
   border: none;
   box-shadow: 1px 3px 3px grey;
   color: white;
@@ -185,7 +189,7 @@ button {
 .rating {
     height: 50px;
     width: 100%;
-    background: #ffd60014;
+    background: #fdfcdd;
     display: flex;
     justify-content: space-between;
     position: relative;
@@ -235,7 +239,6 @@ button {
 .grrating {
     height: 24px;
     width: 100%;
-    background: #88ff7a38;
     display: flex;
     justify-content: space-between;
     position: relative;
@@ -283,6 +286,19 @@ button {
   opacity: 0.8;
 }
 
+.yourreviewtitle {
+  margin-top: 15px;
+}
+
+.reviewtext {
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px;
+    background: #fdfcdd;
+    overflow-wrap: break-word;
+}
+
 .reviewtextbox {
     width: 100%;
 }
@@ -295,4 +311,10 @@ button {
 }
 textarea {
     width: 100%;
+}
+
+.error {
+  color: red;
+  margin: 10px;
+  text-align: center;
 }

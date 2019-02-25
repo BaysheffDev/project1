@@ -7,13 +7,14 @@
 {% block body %}
 	<div class="center">
     <div class="form">
-      <form action="/" method="post">
+      <form action="/login" method="post">
         <label>Username</label>
   			<input type="text" name="username">
         <label>Password</label>
         <input type="password" name="password">
   			<button type="submit">Log in</button>
   		</form>
+			<div class="error">{{message}}</div>
     </div>
 	</div>
 {% endblock %}

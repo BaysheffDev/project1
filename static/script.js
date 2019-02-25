@@ -20,7 +20,7 @@ function dropdown(n) {
   }
 }
 
-function submitreview(name, isbn) {
-  document.getElementById("isbn").value = isbn;
-  document.getElementById(name).submit();
-}
+// function submitreview(name, n, isbn) {
+//   document.getElementById("isbn_rating" + n).value = int(isbn);
+//   console.log(n + " " + isbn);
+// }

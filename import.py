@@ -10,7 +10,7 @@ db = scoped_session(sessionmaker(bind=engine))
 def main() :
     # Create Table
     try:
-        db.execute("CREATE TABLE books (id SERIAL PRIMARY KEY, isbn VARCHAR NOT NULL, title VARCHAR NOT NULL, author VARCHAR NOT NULL, year INT NOT NULL)")
+        db.execute("CREATE TABLE books (id SERIAL PRIMARY KEY, isbn TEXT NOT NULL, title VARCHAR NOT NULL, author VARCHAR NOT NULL, year INT NOT NULL)")
         db.commit()
         print("BOOKS creation SUCCESSFUL.")
     except:
@@ -24,7 +24,7 @@ def main() :
         print("USERS was NOT created.")
 
     try:
-        db.execute("CREATE TABLE reviews (id SERIAL PRIMARY KEY, isbn VARCHAR NOT NULL, user_id INT NOT NULL, rating FLOAT(8), rating_text INT)")
+        db.execute("CREATE TABLE reviews (id SERIAL PRIMARY KEY, isbn TEXT NOT NULL, user_id INT NOT NULL, rating FLOAT(8), rating_text TEXT)")
         db.commit()
         print("REVIEWS creation SUCCESSFUL.")
     except:
